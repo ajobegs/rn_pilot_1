@@ -3,7 +3,7 @@ import { View } from "react-native";
 import { Card, Button, Text } from "react-native-elements";
 import { onSignOut } from "../auth";
 
-export default () => (
+export default ({navigation}) => (
     <View style={{ paddingVertical: 20 }}>
         <Card title="Muhd Danish">
             <View
@@ -23,7 +23,12 @@ export default () => (
             <Button
                 backgroundColor="#03A9F4"
                 title="SIGN OUT"
-                onPress={() => onSignOut()}
+                onPress={() => {
+                    onSignOut()
+                        .then(() => {
+                            navigation.navigate("SignedOut");
+                        })
+                }}
             />
         </Card>
     </View>

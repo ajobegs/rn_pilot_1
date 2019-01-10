@@ -1,5 +1,5 @@
 import React from "react";
-import { createStackNavigator, createBottomTabNavigator, createAppContainer } from "react-navigation";
+import { createStackNavigator, createBottomTabNavigator, createSwitchNavigator, createAppContainer } from "react-navigation";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 
 import SignUp from "./screens/SignUp";
@@ -42,6 +42,26 @@ export const SignedInNavigator = createBottomTabNavigator({
         }
     }
 });
+
+export const RootNavigator = (signedIn = false) => {
+    return createSwitchNavigator(
+        {
+            SignedIn: {
+                screen: SignedIn
+            },
+            SignedOut: {
+                screen: SignedOut
+            }
+        },
+        {
+            initialRouteName: signedIn ? "SignedIn" : "SignedOut"
+        }
+    );
+};
+
+export function createRootNavigator(signedIn) {
+    return createAppContainer(RootNavigator(signedIn));
+}
 
 export const SignedOut = createAppContainer(SignedOutNavigator);
 export const SignedIn = createAppContainer(SignedInNavigator);

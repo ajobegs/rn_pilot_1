@@ -15,7 +15,12 @@ export default ({ navigation }) => (
                 buttonStyle={{ marginTop: 20 }}
                 backgroundColor="#4CAF50"
                 title="SIGN IN"
-                onPress={() => onSignIn()}
+                onPress={() => {
+                    onSignIn()
+                        .then(() => {
+                            navigation.navigate("SignedIn");
+                        })
+                }}
             />
             <Button
                 buttonStyle={{ marginTop: 20 }}
